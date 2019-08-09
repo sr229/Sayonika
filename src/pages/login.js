@@ -3,15 +3,22 @@ import Recaptcha from 'react-recaptcha';
 import { Card, RoundIcon, Row, LoginBackground } from '../components/common';
 import {
     TextField,
+    Box,
     Button,
     Typography,
     Checkbox,
     FormControlLabel
 } from '@material-ui/core';
+import { styled } from '@material-ui/styles';
 
 import icon from '../assets/img/logo.svg';
 import CONFIG from "../utils/config";
 import API from '../utils/api';
+
+const LoginTextField = styled(TextField)(({theme}) => ({
+    margin: theme.spacing(1, 0),
+    flex: "1 auto"
+}));
 
 class LoginPage extends Component {
     state = {
@@ -60,19 +67,22 @@ class LoginPage extends Component {
 
     render() {
         const { username, password, stayLoggedIn } = this.state;
+
         return (
             <LoginBackground>
-                <Card>
+                <Card style={{overflow: "hidden"}}>
+                    <Box style={{margin: "-16px -16px 16px", padding: "16px", color: "white", textAlign: "center"}} bgcolor="primary.main">
                     <RoundIcon src={icon} />
                     <Typography variant="h5">Welcome, please login</Typography>
+                    </Box>
                     <div style={{flexDirection: 'column'}}>
-                        <div style={{flexDirection: 'column'}}>
-                            <TextField
+                        <div style={{flexDirection: 'column', display: "flex"}}>
+                            <LoginTextField
                                 label="Username or email address"
                                 variant="outlined"
                                 onChange={e => this.updateUsername(e.target.value)}
                             />
-                            <TextField
+                            <LoginTextField
                                 label="Password"
                                 variant="outlined"
                                 type="password"
@@ -96,7 +106,7 @@ class LoginPage extends Component {
                         sitekey={CONFIG.CAPTCHA_KEY}
                         verifyCallback={recaptcha=>this.setState({recaptcha})}
                     />
-                    <Row>
+                    <Row style={{display: "flex", justifyContent: "end"}}>
                         <Button onClick={this.handleSignup}>Sign up</Button>
                         <Button
                             color="primary"
