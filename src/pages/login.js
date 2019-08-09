@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import Recaptcha from 'react-recaptcha';
-import { Card, RoundIcon, Row, LoginBackground } from '../components/common';
-import {
-    TextField,
-    Box,
-    Button,
-    Typography,
-    Checkbox,
-    FormControlLabel
-} from '@material-ui/core';
+import { Card, LoginBackground, RoundIcon, Row } from '../components/common';
+import { Box, Button, Checkbox, FormControlLabel, TextField, Typography } from '@material-ui/core';
 import { styled } from '@material-ui/styles';
 
 import icon from '../assets/img/logo.svg';
 import CONFIG from "../utils/config";
 import API from '../utils/api';
 
-const LoginTextField = styled(TextField)(({theme}) => ({
+const LoginTextField = styled(TextField)(({ theme }) => ({
     margin: theme.spacing(1, 0),
     flex: "1 auto"
 }));
@@ -41,18 +34,18 @@ class LoginPage extends Component {
     }
 
     handleLogin = () => {
-        let {username, password, recaptcha} = this.state;
+        let { username, password, recaptcha } = this.state;
 
-        API.login(JSON.stringify({
+        API.login({
             username,
             password,
             recaptcha
-        })).then(r=>{
+        }).then(r => {
             console.log(r);
 
             const token = r.token;
             API.env.token = token;
-            if (this.state.stayLoggedIn){
+            if (this.state.stayLoggedIn) {
                 window.localStorage.token = token;
             } else {
                 window.sessionStorage.token = token
@@ -70,13 +63,14 @@ class LoginPage extends Component {
 
         return (
             <LoginBackground>
-                <Card style={{overflow: "hidden"}}>
-                    <Box style={{margin: "-16px -16px 16px", padding: "16px", color: "white", textAlign: "center"}} bgcolor="primary.main">
-                    <RoundIcon src={icon} />
-                    <Typography variant="h5">Welcome, please login</Typography>
+                <Card style={{ overflow: "hidden" }}>
+                    <Box style={{ margin: "-16px -16px 16px", padding: "16px", color: "white", textAlign: "center" }}
+                         bgcolor="primary.main">
+                        <RoundIcon src={icon}/>
+                        <Typography variant="h5">Welcome, please login</Typography>
                     </Box>
-                    <div style={{flexDirection: 'column'}}>
-                        <div style={{flexDirection: 'column', display: "flex"}}>
+                    <div style={{ flexDirection: 'column' }}>
+                        <div style={{ flexDirection: 'column', display: "flex" }}>
                             <LoginTextField
                                 label="Username or email address"
                                 variant="outlined"
@@ -104,9 +98,9 @@ class LoginPage extends Component {
                     </div>
                     <Recaptcha
                         sitekey={CONFIG.CAPTCHA_KEY}
-                        verifyCallback={recaptcha=>this.setState({recaptcha})}
+                        verifyCallback={recaptcha => this.setState({ recaptcha })}
                     />
-                    <Row style={{display: "flex", justifyContent: "end"}}>
+                    <Row style={{ display: "flex", justifyContent: "end" }}>
                         <Button onClick={this.handleSignup}>Sign up</Button>
                         <Button
                             color="primary"

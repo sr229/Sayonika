@@ -1,17 +1,22 @@
 import CONFIG from './config';
 import { getStorageVar } from './storage';
 
-function createAPIFunction(path, method){
-    return function(body, arg) {
-        if (method==="POST"){
-            body.token = getStorageVar("token");
+function createAPIFunction(path, method) {
+    return function (body, arg) {
+        let isObject = typeof body === "object";
+
+        if (isObject) {
+            if (method === "POST"){
+                body.token = getStorageVar("token");
+            }
+            body = JSON.stringify(body);
         }
 
         let headers = {
             "content-type": "application/json",
         };
 
-        if (API.env.token){
+        if (API.env.token) {
             headers["Authorization"] = API.env.token
         }
 
@@ -23,7 +28,7 @@ function createAPIFunction(path, method){
                 headers
             }
         ).then(
-            r=>r.json()
+            r => r.json()
         ).catch(console.error)
     }
 }
