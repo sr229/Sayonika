@@ -3,9 +3,7 @@ import { getStorageVar } from './storage';
 
 function createAPIFunction(path, method) {
     return function (body, arg) {
-        let isObject = typeof body === "object";
-
-        if (isObject) {
+        if (typeof body === "object") {
             if (method === "POST"){
                 body.token = getStorageVar("token");
             }
