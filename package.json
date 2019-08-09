@@ -12,7 +12,9 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "//snyk-protect": "snyk protect",
-    "//prepublish": "npm run snyk-protect"
+    "//prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
@@ -32,7 +34,8 @@
     "vue-recaptcha-v3": "^1.5.0",
     "vue-social-sharing": "^2.4.3",
     "vuetify": "^1.5.14",
-    "zxcvbn": "^4.4.2"
+    "zxcvbn": "^4.4.2",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -42,5 +45,6 @@
     "nodemon": "^1.19.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
-  }
+  },
+  "snyk": true
 }
