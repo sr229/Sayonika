@@ -1,12 +1,6 @@
 import API from '../utils/api';
 import React, { useEffect, useState } from 'react';
-import {
-    Paper,
-    Avatar,
-    IconButton,
-    Typography,
-    Toolbar
-} from '@material-ui/core';
+import { Avatar, IconButton, Paper, Toolbar, Typography } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,34 +43,30 @@ const Review = ({ id, title, rating, content, author_id }) => {
     const classes = useStyles();
 
     useEffect(() => {
-        const getData = async () => {
-            let data = await API.getUser({}, author_id);
-
-            this.setState({ data });
-        };
-
-        getData();
+        API.getUser({}, author_id).then(data => {
+            setData({ data });
+        }).catch(e => console.error(e));
     }, []);
 
     return (
         <Paper className={classes.root}>
-            <Avatar src={data.avatar} className={classes.avatar} />
+            <Avatar src={data.avatar} className={classes.avatar}/>
             <div className={classes.content}>
                 <div className={classes.reviewHeader}>
                     <Typography variant="h5" className={classes.reviewName}>
                         {data.username || 'John Doe'}
                     </Typography>
-                    <Rating rating={rating} />
+                    <Rating rating={rating}/>
                 </div>
                 <Typography paragraph>{content}</Typography>
                 <Toolbar>
-                    <div className={classes.grow} />
+                    <div className={classes.grow}/>
                     <div>
                         <IconButton>
-                            <ThumbUpIcon />
+                            <ThumbUpIcon/>
                         </IconButton>
                         <IconButton>
-                            <ThumbDownIcon />
+                            <ThumbDownIcon/>
                         </IconButton>
                     </div>
                 </Toolbar>
