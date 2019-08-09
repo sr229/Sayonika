@@ -79,6 +79,7 @@ dist
 
 # IDE
 .idea
+!.idea/codeStyles
 
 .goot
 
