@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Typography, Avatar } from '@material-ui/core';
+import { Paper, Typography, Avatar, Fab } from '@material-ui/core';
 import GamepadIcon from '@material-ui/icons/Gamepad';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ArchiveIcon from '@material-ui/icons/Archive';
@@ -60,10 +60,16 @@ const useStyles = makeStyles(theme => ({
     },
     categoryIcon: {
         paddingRight: theme.spacing.unit
+    },
+    fab: {
+        margin: theme.spacing(1)
+    },
+    fabIcon: {
+        padding: theme.spacing(1)
     }
 }));
 
-const statusCategory = (type, category, favorites) => {
+const statusCategory = (type, category, favorites, handleFavorite) => {
     const classes = useStyles();
     switch (type) {
         case 0:
@@ -122,7 +128,13 @@ const statusCategory = (type, category, favorites) => {
                         <Typography>{category}</Typography>
                     </div>
                     <div className={classes.category}>
-                        <FavoriteIcon className={classes.categoryIcon} />
+                        <Fab
+                            size="small"
+                            className={classes.fab}
+                            onClick={handleFavorite}
+                        >
+                            <FavoriteIcon className={classes.fabIcon} />
+                        </Fab>
                         <Typography>{favorites}</Typography>
                     </div>
                 </div>
@@ -143,6 +155,10 @@ const ModCard = ({
 }) => {
     const classes = useStyles(themeColor);
 
+    const handleFavoriteToggle = event => {
+        event.preventDefault();
+    };
+
     return (
         <Link to={`/mod/${id}`} className={classes.baseLink}>
             <Paper className={classes.root}>
@@ -161,7 +177,12 @@ const ModCard = ({
                         {description ? description : 'No description provided.'}
                     </Typography>
                 </div>
-                {statusCategory(status, category, favorites)}
+                {statusCategory(
+                    status,
+                    category,
+                    favorites,
+                    handleFavoriteToggle
+                )}
             </Paper>
         </Link>
     );
