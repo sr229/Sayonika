@@ -35,7 +35,7 @@
     "vue-social-sharing": "^2.4.3",
     "vuetify": "^1.5.14",
     "zxcvbn": "^4.4.2",
-    "snyk": "^1.189.0"
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
