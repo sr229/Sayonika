@@ -33,7 +33,7 @@
     "vue-recaptcha": "^1.1.1",
     "vue-recaptcha-v3": "^1.5.0",
     "vue-social-sharing": "^2.4.3",
-    "vuetify": "^1.5.14",
+    "vuetify": "^2.1.9",
     "zxcvbn": "^4.4.2",
     "snyk": "^1.230.5"
   },
